@@ -8,10 +8,12 @@ import gzip
 import os
 import theano.d3viz as d3v
 
+
 class ConvPoolLayer(object):
     """Pool Layer of a convolutional network """
 
-    def __init__(self, rng, input, filter_shape, image_shape, activation=relu, poolsize=(2, 2)):
+    def __init__(self, rng, input, filter_shape,
+                 image_shape, activation=relu, poolsize=(2, 2)):
         """
         Allocate a LeNetConvPoolLayer with shared variable internal parameters.
 
@@ -85,7 +87,9 @@ class ConvPoolLayer(object):
         # keep track of model input
         self.input = input
 
+
 class HiddenLayer(object):
+
     def __init__(self, rng, input, n_in, n_out, W=None, b=None,
                  activation=T.tanh):
         """
@@ -144,6 +148,7 @@ class HiddenLayer(object):
 
         self.params = [self.W, self.b]
 
+
 def load_data(dataset):
     ''' Loads the dataset
 
@@ -165,7 +170,7 @@ def load_data(dataset):
         )
         if os.path.isfile(new_path) or data_file == 'mnist.pkl.gz':
             dataset = new_path
-    print ('dataset path ', dataset)
+    print('dataset path ', dataset)
     if (not os.path.isfile(dataset)) and data_file == 'mnist.pkl.gz':
         from six.moves import urllib
         origin = (
@@ -187,7 +192,7 @@ def load_data(dataset):
     # numpy.ndarray of 1 dimension (vector) that has the same length as
     # the number of rows in the input. It should give the target
     # to the example with the same index in the input.
-    
+
     def shared_dataset(data_xy, borrow=True):
         """ Function that loads the dataset into shared variables
 
@@ -221,6 +226,7 @@ def load_data(dataset):
     rval = [(train_set_x, train_set_y), (valid_set_x, valid_set_y),
             (test_set_x, test_set_y)]
     return rval
+
 
 def write_graph(model, output_name, output_format='pdf'):
     formatter = d3v.formatting.PyDotFormatter()
